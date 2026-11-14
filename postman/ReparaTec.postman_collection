@@ -1,0 +1,689 @@
+{
+  "info": {
+    "_postman_id": "8e1d077d-9f34-4db1-a020-34eb44debe00",
+    "name": "ReparaTec API",
+    "description": "Endpoints de la API de ReparaTec: plataforma de recuperación, reparación y donación de equipos tecnológicos.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59185381",
+    "_collection_link": "https://go.postman.co/collection/59185381-8e1d077d-9f34-4db1-a020-34eb44debe00?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "health"
+              ]
+            },
+            "description": "Responde OK si la API está corriendo"
+          },
+          "response": []
+        },
+        {
+          "name": "Health base de datos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/health/db",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "health",
+                "db"
+              ]
+            },
+            "description": "Ejecuta SELECT 1; responde 200 si la conexión funciona"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "Listar usuarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios"
+              ]
+            },
+            "description": "200 con la lista (vacía si no hay registros)"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar usuario por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "1"
+              ]
+            },
+            "description": "200 con el registro"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar usuario que no existe",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "999"
+              ]
+            },
+            "description": "404 porque el id no existe"
+          },
+          "response": []
+        },
+        {
+          "name": "Crear usuario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreUsuario\": \"ana.lopez\",\n  \"correo\": \"ana.lopez@correo.mx\",\n  \"telefono\": \"2225678901\",\n  \"idRol\": 4\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios"
+              ]
+            },
+            "description": "201 con el registro creado"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Donadores",
+      "item": [
+        {
+          "name": "Listar donadores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/donadores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "donadores"
+              ]
+            },
+            "description": "200 con la lista (vacía si no hay registros)"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar donador por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/donadores/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "donadores",
+                "1"
+              ]
+            },
+            "description": "200 con el registro"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar donador que no existe",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/donadores/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "donadores",
+                "999"
+              ]
+            },
+            "description": "404 porque el id no existe"
+          },
+          "response": []
+        },
+        {
+          "name": "Crear donador",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Colegio Atlántico\",\n  \"apellido\": \"A.C.\",\n  \"tipoDonador\": \"Institución\",\n  \"telefono\": \"2227778899\",\n  \"correo\": \"sistemas@colegioatlantico.edu.mx\",\n  \"direccion\": \"Blvd. Norte 900, Las Ánimas\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/donadores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "donadores"
+              ]
+            },
+            "description": "201 con el registro creado"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Equipos",
+      "item": [
+        {
+          "name": "Listar equipos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/equipos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "equipos"
+              ]
+            },
+            "description": "200 con la lista (vacía si no hay registros)"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar equipo por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/equipos/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "equipos",
+                "1"
+              ]
+            },
+            "description": "200 con el registro"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar equipo que no existe",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/equipos/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "equipos",
+                "999"
+              ]
+            },
+            "description": "404 porque el id no existe"
+          },
+          "response": []
+        },
+        {
+          "name": "Crear equipo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigoInventario\": \"INV-004\",\n  \"marca\": \"Lenovo\",\n  \"modelo\": \"ThinkPad T480\",\n  \"numeroSerie\": \"LNT480-3321\",\n  \"procesador\": \"Intel Core i5-8350U\",\n  \"memoriaRam\": \"8 GB\",\n  \"capacidadAlmacenamiento\": \"256 GB\",\n  \"sistemaOperativo\": \"Windows 10\",\n  \"idCategoria\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/equipos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "equipos"
+              ]
+            },
+            "description": "201 con el registro creado"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Técnicos",
+      "item": [
+        {
+          "name": "Listar técnicos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/tecnicos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tecnicos"
+              ]
+            },
+            "description": "200 con la lista (vacía si no hay registros)"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar técnico por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/tecnicos/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tecnicos",
+                "1"
+              ]
+            },
+            "description": "200 con el registro"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar técnico que no existe",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/tecnicos/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tecnicos",
+                "999"
+              ]
+            },
+            "description": "404 porque el id no existe"
+          },
+          "response": []
+        },
+        {
+          "name": "Crear técnico",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Jorge\",\n  \"apellido\": \"Torres\",\n  \"especialidad\": \"Impresoras\",\n  \"telefono\": \"2224567890\",\n  \"correo\": \"jorge.torres@reparatec.mx\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tecnicos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tecnicos"
+              ]
+            },
+            "description": "201 con el registro creado"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Componentes",
+      "item": [
+        {
+          "name": "Listar componentes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/componentes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "componentes"
+              ]
+            },
+            "description": "200 con la lista (vacía si no hay registros)"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar componente por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/componentes/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "componentes",
+                "1"
+              ]
+            },
+            "description": "200 con el registro"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar componente que no existe",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/componentes/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "componentes",
+                "999"
+              ]
+            },
+            "description": "404 porque el id no existe"
+          },
+          "response": []
+        },
+        {
+          "name": "Crear componente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreComponente\": \"Pasta térmica\",\n  \"marca\": \"Arctic\",\n  \"modelo\": \"MX-4\",\n  \"descripcion\": \"Jeringa de 4 g\",\n  \"precio\": 120,\n  \"existencia\": 15\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/componentes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "componentes"
+              ]
+            },
+            "description": "201 con el registro creado"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Solicitudes",
+      "item": [
+        {
+          "name": "Listar solicitudes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/solicitudes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "solicitudes"
+              ]
+            },
+            "description": "200 con la lista (vacía si no hay registros)"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar solicitud por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/solicitudes/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "solicitudes",
+                "1"
+              ]
+            },
+            "description": "200 con el registro"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar solicitud que no existe",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/solicitudes/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "solicitudes",
+                "999"
+              ]
+            },
+            "description": "404 porque el id no existe"
+          },
+          "response": []
+        },
+        {
+          "name": "Crear solicitud",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"motivo\": \"Necesita computadora para diseño\",\n  \"usoDestinado\": \"Diseño\",\n  \"prioridad\": \"Media\",\n  \"observaciones\": \"\",\n  \"idBeneficiario\": 4\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/solicitudes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "solicitudes"
+              ]
+            },
+            "description": "201 con el registro creado"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar solicitudes pendientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/solicitudes/pendientes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "solicitudes",
+                "pendientes"
+              ]
+            },
+            "description": "200 con la cola de pendientes, en el orden en que se atenderán"
+          },
+          "response": []
+        },
+        {
+          "name": "Atender siguiente solicitud",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/solicitudes/atender",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "solicitudes",
+                "atender"
+              ]
+            },
+            "description": "200 con la solicitud que salió de la cola (FIFO), o 404 si no hay pendientes"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

@@ -6,9 +6,10 @@ public record Usuario(
         int id,
         String nombreUsuario,
         String correo,
+        String contrasenaUsuario,
         String telefono,
         LocalDate fechaRegistro,
         String estado,
-        int idRol
+        String rol
 ) {
 }

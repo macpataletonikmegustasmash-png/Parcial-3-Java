@@ -1,7 +1,10 @@
 package com.example.parcial3.controllers;
 
 import com.example.parcial3.dto.CreateUsuarioRequest;
+import com.example.parcial3.dto.UsuarioResponse;
 import com.example.parcial3.models.Usuario;
+import com.example.parcial3.security.RequiereRol;
+import com.example.parcial3.security.Roles;
 import com.example.parcial3.services.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,25 +28,28 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public List<Usuario> listar() {
-        return usuarioService.listar();
+    @RequiereRol(Roles.ADMIN)
+    public List<UsuarioResponse> listar() {
+        return usuarioService.listar().stream().map(UsuarioResponse::de).toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscarPorId(@PathVariable int id) {
+    @RequiereRol(Roles.ADMIN)
+    public ResponseEntity<UsuarioResponse> buscarPorId(@PathVariable int id) {
         Usuario usuario = usuarioService.buscarPorId(id);
         if (usuario == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(usuario);
+        return ResponseEntity.ok(UsuarioResponse.de(usuario));
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> crear(@RequestBody CreateUsuarioRequest datos) {
+    @RequiereRol(Roles.ADMIN)
+    public ResponseEntity<UsuarioResponse> crear(@RequestBody CreateUsuarioRequest datos) {
         if (datos.nombreUsuario() == null || datos.nombreUsuario().isBlank()) {
             return ResponseEntity.badRequest().build();
         }
         Usuario nuevo = usuarioService.crear(datos);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioResponse.de(nuevo));
     }
 }

@@ -2,6 +2,8 @@ package com.example.parcial3.controllers;
 
 import com.example.parcial3.dto.CreateComponenteRequest;
 import com.example.parcial3.models.Componente;
+import com.example.parcial3.security.RequiereRol;
+import com.example.parcial3.security.Roles;
 import com.example.parcial3.services.ComponenteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +41,7 @@ public class ComponenteController {
     }
 
     @PostMapping
+    @RequiereRol({Roles.ADMIN, Roles.TECNICO})
     public ResponseEntity<Componente> crear(@RequestBody CreateComponenteRequest datos) {
         if (datos.nombreComponente() == null || datos.nombreComponente().isBlank()
                 || datos.precio() < 0 || datos.existencia() < 0) {

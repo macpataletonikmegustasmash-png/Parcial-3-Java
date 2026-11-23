@@ -2,6 +2,8 @@ package com.example.parcial3.controllers;
 
 import com.example.parcial3.dto.CreateTecnicoRequest;
 import com.example.parcial3.models.Tecnico;
+import com.example.parcial3.security.RequiereRol;
+import com.example.parcial3.security.Roles;
 import com.example.parcial3.services.TecnicoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +42,7 @@ public class TecnicoController {
     }
 
     @PostMapping
+    @RequiereRol(Roles.ADMIN)
     public ResponseEntity<Tecnico> crear(@RequestBody CreateTecnicoRequest datos) {
         if (datos.nombre() == null || datos.nombre().isBlank()) {
             return ResponseEntity.badRequest().build();

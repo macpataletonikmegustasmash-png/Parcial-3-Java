@@ -2,6 +2,8 @@ package com.example.parcial3.controllers;
 
 import com.example.parcial3.dto.CreateSolicitudRequest;
 import com.example.parcial3.models.Solicitud;
+import com.example.parcial3.security.RequiereRol;
+import com.example.parcial3.security.Roles;
 import com.example.parcial3.services.SolicitudService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,7 @@ public class SolicitudController {
     }
 
     @GetMapping("/pendientes")
+    @RequiereRol({Roles.ADMIN, Roles.TECNICO})
     public List<Solicitud> listarPendientes() {
         return solicitudService.listarPendientes();
     }
@@ -53,6 +56,7 @@ public class SolicitudController {
     }
 
     @PostMapping("/atender")
+    @RequiereRol({Roles.ADMIN, Roles.TECNICO})
     public ResponseEntity<Solicitud> atenderSiguiente() {
         Solicitud atendida = solicitudService.atenderSiguiente();
         if (atendida == null) {

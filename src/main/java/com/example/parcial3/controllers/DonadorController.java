@@ -2,6 +2,8 @@ package com.example.parcial3.controllers;
 
 import com.example.parcial3.dto.CreateDonadorRequest;
 import com.example.parcial3.models.Donador;
+import com.example.parcial3.security.RequiereRol;
+import com.example.parcial3.security.Roles;
 import com.example.parcial3.services.DonadorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +41,7 @@ public class DonadorController {
     }
 
     @PostMapping
+    @RequiereRol(Roles.ADMIN)
     public ResponseEntity<Donador> crear(@RequestBody CreateDonadorRequest datos) {
         if (datos.nombre() == null || datos.nombre().isBlank()) {
             return ResponseEntity.badRequest().build();

@@ -2,6 +2,8 @@ package com.example.parcial3.controllers;
 
 import com.example.parcial3.dto.CreateEquipoRequest;
 import com.example.parcial3.models.Equipo;
+import com.example.parcial3.security.RequiereRol;
+import com.example.parcial3.security.Roles;
 import com.example.parcial3.services.EquipoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +41,7 @@ public class EquipoController {
     }
 
     @PostMapping
+    @RequiereRol({Roles.ADMIN, Roles.TECNICO})
     public ResponseEntity<Equipo> crear(@RequestBody CreateEquipoRequest datos) {
         if (datos.codigoInventario() == null || datos.codigoInventario().isBlank()) {
             return ResponseEntity.badRequest().build();
